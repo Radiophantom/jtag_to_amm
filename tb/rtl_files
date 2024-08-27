@@ -1,0 +1,6 @@
+../rtl/avalon_mm_if.sv
+../rtl/amm_regs_pkg.sv
+../rtl/amm_regs.sv
+../rtl/amm_mem.sv
+../rtl/amm_demux.sv
+../rtl/amm_conv.sv
