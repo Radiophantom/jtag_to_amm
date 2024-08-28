@@ -1,7 +1,7 @@
 
 package amm_regs_pkg;
 
-  parameter bit [0:31][15:0] regs_ro_mask = {
+  parameter logic [15:0] REGS_RO_MASK [32] = '{
     16'h0000,
     16'h00FF,
     16'hFF00,
@@ -36,39 +36,39 @@ package amm_regs_pkg;
     16'hFFFF
   };
 
-  parameter bit [0:31][15:0] regs_init = {
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD,
-    16'hABCD
+  parameter logic [15:0] REGS_INIT [32] = '{
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD,
+    16'hAAAA,
+    16'hBBBB,
+    16'hCCCC,
+    16'hDDDD
   };
 
 endpackage

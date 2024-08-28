@@ -8,22 +8,22 @@ module amm_regs (
 import amm_regs_pkg::*;
 
 //------------------------------------------------------------------------------
-logic [0:31][15:0] regs;// [32];
+logic [15:0] regs [32];
 //------------------------------------------------------------------------------
 
 logic [4:0]   addr;
 logic [15:0]  writedata;
 
-assign addr       = mem_if.address[4:0];
+assign addr       = mem_if.address  [4:0];
 assign writedata  = mem_if.writedata[15:0];
 
 always_ff @(posedge clk_i,posedge rst_i)
   if(rst_i)
-    regs <= regs_init;
+    regs <= REGS_INIT;
   else
     if(mem_if.write)
       for(int i = 0; i < 16; i++)
-        if(!regs_ro_mask[addr][i])
+        if(!REGS_RO_MASK[addr][i])
           regs[addr][i] <= writedata[i];
 
 //------------------------------------------------------------------------------

@@ -6,7 +6,7 @@ module dut (
   avalon_mm_if  mem_if
 );
 
-parameter int SLV_BASE [2] = '{32, 1024};
+parameter int SLV_OFFSETS [2] = '{32, 1024};
 
 avalon_mm_if #(32,16) mem_w_if (clk_i);
 
@@ -19,7 +19,7 @@ avalon_mm_if #(32,16) mem_dmx_if [0:1] (clk_i);
 
 amm_demux #(
   .SLV_CNT    ( 2             ),
-  .SLV_BASE   ( SLV_BASE      )
+  .SLV_OFFSETS( SLV_OFFSETS   )
 ) amm_demux_inst (
   .rst_i      ( rst_i         ),
   .clk_i      ( clk_i         ),

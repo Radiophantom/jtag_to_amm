@@ -1,7 +1,7 @@
 
 module amm_demux #(
   parameter int SLV_CNT,
-  parameter int SLV_BASE [SLV_CNT]
+  parameter int SLV_OFFSETS [SLV_CNT]
 )(
   input         rst_i,
   input         clk_i,
@@ -18,7 +18,7 @@ parameter DUMMY_SLV_INDX = SLV_CNT;
 
 function int get_slave_index(bit [31:0] address);
   for(int i = 0; i < SLV_CNT; i++)
-    if(mst_mem_if.address < SLV_BASE[i])
+    if(mst_mem_if.address < SLV_OFFSETS[i])
       return i;
   return DUMMY_SLV_INDX;
 endfunction
@@ -31,9 +31,9 @@ assign current_slave_index = get_slave_index(mst_mem_if.address);
 // Demux outputs
 //------------------------------------------------------------------------------
 
-logic [SLV_CNT-1:0]       slv_mem_readdatavalid;
-logic [SLV_CNT-1:0][15:0] slv_mem_readdata;
-logic [SLV_CNT-1:0]       slv_mem_waitrequest;
+logic        slv_mem_readdatavalid [SLV_CNT-1:0];
+logic [15:0] slv_mem_readdata      [SLV_CNT-1:0];
+logic        slv_mem_waitrequest   [SLV_CNT-1:0];
 
 genvar g;
 generate
@@ -69,7 +69,7 @@ always_ff @(posedge clk_i,posedge rst_i)
 //------------------------------------------------------------------------------
 
 assign mst_mem_if.readdatavalid  = (current_slave_index == DUMMY_SLV_INDX) ? readdatavalid  : slv_mem_readdatavalid [current_slave_index];
-assign mst_mem_if.readdata       = (current_slave_index == DUMMY_SLV_INDX) ? 16'hBEAF       : slv_mem_readdata      [current_slave_index];
+assign mst_mem_if.readdata       = (current_slave_index == DUMMY_SLV_INDX) ? 16'hFFFF       : slv_mem_readdata      [current_slave_index];
 assign mst_mem_if.waitrequest    = (current_slave_index == DUMMY_SLV_INDX) ? 1'b0           : slv_mem_waitrequest   [current_slave_index];
 
 endmodule
