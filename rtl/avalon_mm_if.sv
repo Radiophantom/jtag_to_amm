@@ -17,6 +17,7 @@ logic               readdatavalid;
 logic [DATA_W-1:0]  readdata;
 logic               waitrequest;
 
+// synthesis translate_off
 clocking cb @(posedge clk);
   input   readdatavalid,
           readdata,
@@ -27,6 +28,7 @@ clocking cb @(posedge clk);
           write,
           writedata;
 endclocking
+// synthesis translate_on
 
 endinterface
 

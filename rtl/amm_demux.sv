@@ -14,7 +14,7 @@ module amm_demux #(
 // Parameters
 //------------------------------------------------------------------------------
 
-parameter DUMMY_SLV_INDX = SLV_CNT;
+localparam int DUMMY_SLV_INDX = SLV_CNT;
 
 function int get_slave_index(bit [31:0] address);
   for(int i = 0; i < SLV_CNT; i++)
@@ -62,7 +62,7 @@ always_ff @(posedge clk_i,posedge rst_i)
   if(rst_i)
     readdatavalid <= 1'b0;
   else
-    readdatavalid <= mem_if.read;
+    readdatavalid <= mst_mem_if.read;
 
 //------------------------------------------------------------------------------
 // Mux inputs
